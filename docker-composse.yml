@@ -5,7 +5,7 @@ services:
  frontend:
    build:
      context: .
-     dockerfile: ./hadiya-front/Dockerfile
+     dockerfile: ./Dockerfile
    image: angular-build
    restart: unless-stopped
    networks:
@@ -14,7 +14,7 @@ services:
    image: nginx:latest
    container_name: my-frontend-nginx-container
    volumes:
-     - ./hadiya-front/conf.d:/etc/nginx/conf.d
+     - ./conf.d:/etc/nginx/conf.d
    depends_on:
      - frontend
    ports:
