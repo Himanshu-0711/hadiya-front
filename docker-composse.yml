@@ -5,10 +5,8 @@ services:
  frontend:
    build:
      context: .
-     dockerfile: ./Dockerfile
+     dockerfile: ./hadiya-front/Dockerfile
    image: angular-build
-   depends_on:
-     - backend
    restart: unless-stopped
    networks:
      - internalnet
@@ -16,7 +14,7 @@ services:
    image: nginx:latest
    container_name: my-frontend-nginx-container
    volumes:
-     - ./conf.d:/etc/nginx/conf.d
+     - ./hadiya-front/conf.d:/etc/nginx/conf.d
    depends_on:
      - frontend
    ports:
