@@ -1,1 +1,31 @@
+version: '3'
+
+
+services:
+ frontend:
+   build:
+     context: .
+     dockerfile: ./Dockerfile
+   image: angular-build
+   depends_on:
+     - backend
+   restart: unless-stopped
+   networks:
+     - internalnet
+ fnginx:
+   image: nginx:latest
+   container_name: my-frontend-nginx-container
+   volumes:
+     - ./conf.d:/etc/nginx/conf.d
+   depends_on:
+     - frontend
+   ports:
+     - "8080:80"
+   networks:
+     - internalnet
+
+
+networks:
+ internalnet:
+   driver: bridge
 
